@@ -1,11 +1,21 @@
+@import "tailwindcss";
+
+/* Width from which the navigation sits on the left instead of above main */
+@theme {
+  --breakpoint-nav: 62.5rem;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Fira Code", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+
+  --color-heading: #7dcfff;
+  --color-current: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,17 +33,6 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  min-width: 320px;
-  max-width: 1280px;
-  min-height: 100vh;
-  /* text-align: center; */
-}
-
 ul {
   display: flex;
   flex-direction: column;
@@ -46,63 +45,58 @@ li {
   vertical-align: middle;
 }
 
-li svg {
-  position: relative;
-  top: 0.7em;
-}
-
+/* Post titles (h1) match the h3 headings on the home and blog pages */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-.ref-gh {
-  color: #9A9996;
-
-}
-.ref-gh > a {
-  color: #83B1ED;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  margin-bottom: 10px;
 }
 
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.post-date {
+  color: #9A9996;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
+
+    --color-heading: #0a74a8;
+    --color-current: #111111;
   }
 
   a:hover {
     color: #747bff;
   }
 
-  .ref-gh {
-    color: #383838
+  .post-date {
+    color: #7a7a7a;
   }
-  .ref-gh > a {
-    color: #0053AD;
-  }
+}
 
-  button {
-    background-color: #f9f9f9;
+/* Navigation: a row above main on small screens, a column on the left otherwise */
+.nav-list {
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.nav-list li {
+  line-height: 2;
+}
+
+@media (min-width: 62.5rem) {
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
   }
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6, .nav-title {
+  color: var(--color-heading);
+  font-weight: 700;
+}
+
+/* Current page in the navigation */
+.nav-link[aria-current="page"] {
+  color: var(--color-current);
 }

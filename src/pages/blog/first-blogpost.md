@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/Layout.astro
 title: First ever blog post
 description: Introduction to my blog.
 date: July 15, 2026
@@ -6,7 +7,7 @@ date: July 15, 2026
 
 # Hi there
 
-Wow you found me?
+Wow, you found me!
 
 You are reading my first ever blog post.
 I cannot say whether more will follow.

@@ -1,0 +1,64 @@
+---
+import "@fontsource/fira-code";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  // Set by Astro when this layout is used from a markdown file's frontmatter
+  frontmatter?: { title?: string; description?: string };
+}
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title
+  ? `${frontmatter.title} | Michael Krebs`
+  : (Astro.props.title ?? "Michael Krebs");
+const description =
+  frontmatter?.description ??
+  Astro.props.description ??
+  "Personal Website of the in Germany living, passionate developer Michael";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/blog/", label: "Blog" },
+];
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href.replace(/\/$/, ""));
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/favicon.svg" />
+  </head>
+  <body class="flex flex-col nav:flex-row nav:items-start gap-6 nav:gap-16 px-6 py-8 nav:pt-12 mx-auto max-w-4xl">
+    <aside class="flex flex-row items-baseline gap-4 w-full max-w-[65ch] mx-auto nav:mx-0 nav:max-w-none nav:flex-col nav:items-start nav:gap-0 nav:w-40 nav:shrink-0">
+      <div class="nav-title">Navigate</div>
+      <ul class="nav-list">
+        {
+          links.map(({ href, label }) => (
+            <li>
+              <a
+                class="nav-link"
+                href={href}
+                aria-current={isCurrent(href) ? "page" : undefined}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+    <main class="w-full max-w-[65ch] mx-auto nav:mx-0 nav:flex-1">
+      <slot />
+    </main>
+  </body>
+</html>

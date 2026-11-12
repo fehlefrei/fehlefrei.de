@@ -1,17 +1,24 @@
 ---
-import "../../styles/global.css";
-// import * as greatPost from "./posts/great-post.md";
-// const compiled = await greatPost.compiledContent();
-const posts = Object.values(import.meta.glob("./*.md", { eager: true }));
+import Layout from "../../layouts/Layout.astro";
+const posts = (
+  Object.values(import.meta.glob("./*.md", { eager: true })) as any[]
+).sort(
+  (a, b) =>
+    new Date(b.frontmatter.date).getTime() -
+    new Date(a.frontmatter.date).getTime(),
+);
 ---
 
-
-<p>Post Archive:</p>
-<ul>
-  {
-    posts.map((post: any) => (
-    <p>{post.frontmatter.date}</p>
-      <a href={post.url}>{post.frontmatter.title}</a>
-    ))
-  }
-</ul>
+<Layout title="Blog | Michael Krebs">
+  <h3 class="font-bold mb-[10px]">fehlefrei's Blog</h3>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <span class="post-date">{post.frontmatter.date}</span>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

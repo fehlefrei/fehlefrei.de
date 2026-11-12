@@ -1,48 +1,13 @@
 ---
-import "../styles/global.css";
-import { Activity, Briefcase, Cake, MapPin, User } from "@lucide/astro";
-
-// const response = await fetch("https://api.thesenior.dev/me");
-// const data = await response.json();
-const data = { name: "Michael", age: "early twenties" };
-const name = data.name;
-const age = data.age;
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Michael Krebs</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Personal Website of the in Germany living, passionate developer Michael"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/favicon.svg" />
-  </head>
-  <body>
-    <div>
-      <h1>
-        Hello
-        <span style="font-size:50px;">&#128075;</span>
-      </h1>
-      <p>Some things about me:</p>
-      <ul>
-        <li><User />{name}</li>
-        <li><Cake />{age}</li>
-        <li><MapPin />Germany (Bavaria)</li>
-        <li><Briefcase />DevOps Engineer</li>
-        <li>
-          <Activity />servers, software, volleyball, travel (nature)
-        </li>
-      </ul>
-      <p class="ref-gh">
-        Visit
-        <span> <a href="https://github.com/m-krebs">my GitHub</a> </span>
-        and check out what I am working on.
-      </p>
-    </div>
-  </body>
-</html>
+<Layout>
+  <div>
+    <h3 class="font-bold mb-[10px]">Hi and welcome <span>&#128075;</span></h3>
+    <p>Hi, I'm Michael, also known as fehlefrei. I am based in Bavaria, Germany.
+      I have a special interest for computers, but would not decline a match of volleyball.
+    </p>
+    <span>Take a look at my projects <a href="https://github.com/fehlefrei">here</a></span>.
+  </div>
+</Layout>
